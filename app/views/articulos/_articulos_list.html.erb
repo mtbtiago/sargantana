@@ -1,44 +1,37 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-
-      <table id="sort-table" class="table table-striped tablesorter">
-        <thead>
+<table id="sort-table" class="table table-bordered table-hover table-condensed">
+  <thead>
+  <tr>
+    <th>Referencia</th>
+    <th>Nombre</th>
+    <th>Stock</th>
+    <th>Color</th>
+    <th>Talla</th>
+    <th>Código</th>
+  </tr>
+  </thead>
+  <tbody>
+    <% ant_referencia = nil%>
+    <% @articulos.each do |articulo| %>
+      <% if articulo.referencia == ant_referencia %>
         <tr>
-          <th>Referencia</th>
-          <th>Nombre</th>
-          <th>Stock</th>
-          <th>Color</th>
-          <th>Talla</th>
-          <th>Código</th>
-        </tr>
-        </thead>
-        <tbody>
-          <% ant_referencia = nil%>
-          <% @articulos.each do |articulo| %>
-            <% if articulo.referencia == ant_referencia %>
-              <tr>
-            <% else %>
-              <tr class="lead">
-              <% ant_referencia = articulo.referencia %>
-            <% end %>
-              <td><%= articulo.referencia %></td>
-              <td><%= articulo.nombre %></td>
-              <td><%= articulo.stock %></td>
-              <td><%= articulo.nombre_color %></td>
-              <td><%= articulo.nombre_talla %></td>
-              <td><%= articulo.codigo %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-      <div>
-        <%= page_entries_info @articulos %>
-      </div>
-        
-      <nav>
-        <%= will_paginate @articulos, renderer: BootstrapPagination::Rails %>
-      </nav>
-    </div>
-  </div>
+      <% else %>
+        <tr class="lead">
+        <% ant_referencia = articulo.referencia %>
+      <% end %>
+        <td><%= articulo.referencia %></td>
+        <td><%= articulo.nombre %></td>
+        <td><p class="text-center"><%= articulo.stock %></p></td>
+        <td><%= articulo.nombre_color %></td>
+        <td><p class="text-center"><%= articulo.nombre_talla %></p></td>
+        <td><%= articulo.codigo %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<div>
+  <%= page_entries_info @articulos %>
 </div>
+  
+<nav>
+  <%= will_paginate @articulos, renderer: BootstrapPagination::Rails %>
+</nav>

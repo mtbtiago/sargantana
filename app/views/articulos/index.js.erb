@@ -1,0 +1,11 @@
+<% js = escape_javascript(
+  render(
+    :partial => 'articulos/articulos_list',
+    :locals => { :articulos => @articulos }
+  )
+) %>
+$("#results").html("<%= js %>");
+$('#overlayTrigger').click(function(event) {
+  event.preventDefault();
+  $('body').chardinJs('start');
+});

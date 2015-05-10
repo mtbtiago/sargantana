@@ -1,46 +1,63 @@
 <div class="container">
+  <%= form_for_filterrific @filterrific do |f| %>
+  <div class="row">
+    <div class="col-md-3">
+      <div class="form-group chardin_box" data-position="top" data-intro="Buscar por referencia o nombre">
+        <p>Buscar</p>
+        <%= f.text_field(
+          :search_query,
+          class: 'filterrific-periodically-observed form-control') %>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="form-group chardin_box" data-position="top" data-intro="Ordenar la consulta">
+        <p>Ordenado por</p>
+        <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by],
+          {},
+          {:class => 'form-control'}) %>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group chardin_box" data-position="top" data-intro="Seleccionar un color">
+          <p>Color</p>
+          <%= f.select(:with_nombre_color, 
+            Articulo.select(:nombre_color).distinct.order(:nombre_color).map {|e| e[:nombre_color]},
+            {:include_blank => 'Todos'},
+            {:class => 'form-control'}) %>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group chardin_box" data-position="top" data-intro="Seleccionar una talla">
+          <p>Talla</p>
+          <%= f.select(:with_nombre_talla, 
+            Articulo.select(:nombre_talla).distinct.order(:nombre_talla).map {|e| e[:nombre_talla]},
+            {:include_blank => 'Todas'},
+            {:class => 'form-control'}) %>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="form-group">
+        <%= link_to(
+          'Reiniciar búsqueda',
+          reset_filterrific_url,
+          {:class => 'btn btn-success', :id => 'btn_reset_search'}) %>
+      </div>
+    </div>
+    <%# add an automated spinner to your form when the list is refreshed %>
+    <%= render_filterrific_spinner %>
+  </div>
+ <% end %>
+</div>
+<div class="container">
   <div class="row">
     <div class="col-md-12">
-
-      <table id="sort-table" class="table table-striped tablesorter">
-        <thead>
-        <tr>
-          <th>Referencia</th>
-          <th>Nombre</th>
-          <th>Stock</th>
-          <th>Color</th>
-          <th>Talla</th>
-          <th>Código</th>
-        </tr>
-        </thead>
-        <tbody>
-          <% ant_referencia = nil%>
-          <% @articulos.each do |articulo| %>
-            <% if articulo.referencia == ant_referencia %>
-              <tr>
-            <% else %>
-              <tr class="lead">
-              <% ant_referencia = articulo.referencia %>
-            <% end %>
-              <td><%= articulo.referencia %></td>
-              <td><%= articulo.nombre %></td>
-              <td><%= articulo.stock %></td>
-              <td><%= articulo.nombre_color %></td>
-              <td><%= articulo.nombre_talla %></td>
-              <td><%= articulo.codigo %></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-      <div>
-        <%= page_entries_info @articulos %>
+      <div id="results">
+        <%= render(
+              partial: 'articulos/articulos_list',
+              locals: { articulos: @articulos }
+            ) %>
+        </div>
       </div>
-        
-      <nav>
-        <%= will_paginate @articulos, renderer: BootstrapPagination::Rails %>
-      </nav>
     </div>
-  </div>
 </div>
-
 

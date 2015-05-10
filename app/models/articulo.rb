@@ -22,6 +22,8 @@ class Articulo < ActiveRecord::Base
     default_filter_params: { sorted_by: 'referencia_talla_asc' },
     available_filters: [
       :sorted_by,
+      :with_nombre_color,
+      :with_nombre_talla,
       :search_query
     ]
   )
@@ -72,16 +74,24 @@ class Articulo < ActiveRecord::Base
     end
   }
 
+  scope :with_nombre_color, lambda { |nombre_colors|
+    where(:nombre_color => [*nombre_colors])
+  }
+
+  scope :with_nombre_talla, lambda { |nombre_tallas|
+    where(:nombre_talla => [*nombre_tallas])
+  }
+
   def self.options_for_sorted_by
     [
+      ['Referencia', 'referencia_talla_asc'],
       ['Código', 'codigo_asc'],
-      ['Referencia', 'referencia_asc'],
+      ['Nombre', 'nombre_asc'],
       ['Stock de menos a más', 'stock_asc'],
       ['Stock de más a menos', 'stock_desc'],
-      ['Talla', 'talla_asc'],
-      ['Color', 'color_asc']
+      ['Talla', 'nombre_talla_asc'],
+      ['Color', 'nombre_color_asc']
     ]
   end
-
 
 end
