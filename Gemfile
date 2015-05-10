@@ -22,6 +22,8 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
+# https://github.com/twbs/bootstrap-sass
+gem 'bootstrap-sass', '~> 3.3.4'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -34,6 +36,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # https://github.com/jhund/filterrific
 gem 'filterrific'
+# https://github.com/mislav/will_paginate
+gem 'will_paginate', '~> 3.0.6'
+# https://github.com/bootstrap-ruby/will_paginate-bootstrap
+gem 'will_paginate-bootstrap'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -57,6 +63,9 @@ group :development, :test do
   gem "binding_of_caller"
   gem "awesome_print", require:"ap"
   gem 'factory_girl_rails'
+
+  # https://github.com/bbatsov/rubocop#installation
+  gem 'rubocop', require: false
 
 end
 

@@ -1,2 +1,17 @@
-<h1>Articulos#index</h1>
-<p>Find me in app/views/articulos/index.html.erb</p>
+<div id="articulos-index">
+  <% @articulos.each do |articulo| %>
+    <div class="row invoice_box">
+      <div class="container">
+        <div class="col-md-12">
+          <h3><%= articulo.nombre %> <span class="small"><%= articulo.referencia %></span> </h3>
+          <h4>
+          stock: <%= articulo.stock %>. 
+          color: <%= articulo.nombre_color %>. 
+          talla: <%= articulo.nombre_talla %>.
+          </h4>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+<%= will_paginate @articulos, renderer: BootstrapPagination::Rails %>
