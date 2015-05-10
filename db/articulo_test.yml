@@ -1,0 +1,42 @@
+
+---
+articulo:
+  columns:
+  - codigo
+  - nombre
+  - referencia
+  - stock
+  - color
+  - talla
+  records: 
+  - - "447700062899"
+    - "HANOI PRIM PETIT 'NATURAL-U'"
+    - "14/3"
+    - 10.000000
+    - "628"
+    - "99"
+  - - "447700063799"
+    - "HANOI PRIM PETIT 'TURQUESA-U'"
+    - "14/3"
+    - 2.000000
+    - "637"
+    - "99"
+  - - "447700064299"
+    - "HANOI PRIM PETIT 'MORAT-U'"
+    - "14/3"
+    - 1.000000
+    - "642"
+    - "99"
+  - - "447700064399"
+    - "HANOI PRIM PETIT 'GRANA-U'"
+    - "14/3"
+    - 3.000000
+    - "643"
+    - "99"
+  - - "447700064499"
+    - "HANOI PRIM PETIT 'ANYIL-U'"
+    - "14/3"
+    - 1.000000
+    - "644"
+    - "99"
+    

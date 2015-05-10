@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding='UTF-8' ?>
+<dbi2mysql>
+  <dbisam ip="" database="C:\d32\pounoutoweb\bin\DATA" /> 
+  <query> 
+     SELECT Codigo, Nombre, Referencia, Stock, Color, Talla
+     FROM pwFSOArtic
+     WHERE Stock > 0
+     ORDER BY REFERENCIA, CODIGO
+  </query>
+  <target kind="yaml" table_name="articulo">.\articulo.yml</target>
+  <ftp enabled="no" server="ftp.sistemasc.net" user="partesonline" password="s1st3m4" ftppath="sql"/>
+  <actions>
+    <action enabled="no" type="url">
+    http://www.sistemasc.net/partes/importar_sql.php?archivo=%TARGETFN%
+    </action>
+  </actions>
+</dbi2mysql>
