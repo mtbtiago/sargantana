@@ -9,19 +9,25 @@
           <th>Stock</th>
           <th>Color</th>
           <th>Talla</th>
-          <th>Codigo</th>
+          <th>Código</th>
         </tr>
       </thead>
       <tbody>
+        <% ant_referencia = nil%>
         <% @articulos.each do |articulo| %>
-        <tr>
-          <td><%= articulo.referencia %></td>
-          <td><%= articulo.nombre %></td>
-          <td><%= articulo.stock %></td>
-          <td><%= articulo.nombre_color %></td>
-          <td><%= articulo.nombre_talla %></td>
-          <td><%= articulo.codigo %></td>
-        </tr>
+          <% if articulo.referencia == ant_referencia %>
+            <tr>
+          <% else %>
+            <tr class="lead">
+            <% ant_referencia = articulo.referencia %>
+          <% end %>
+            <td><%= articulo.referencia %></td>
+            <td><%= articulo.nombre %></td>
+            <td><%= articulo.stock %></td>
+            <td><%= articulo.nombre_color %></td>
+            <td><%= articulo.nombre_talla %></td>
+            <td><%= articulo.codigo %></td>
+          </tr>
         <% end %>
       </tbody>
       </table>

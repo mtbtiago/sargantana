@@ -16,5 +16,5 @@
 #
 
 class Articulo < ActiveRecord::Base
-  self.per_page = 20
+  self.per_page = 16
 end
