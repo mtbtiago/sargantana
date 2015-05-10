@@ -5,10 +5,39 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
+  <div class="navbar navbar-default">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">
+        <%= image_tag("pou_nou.png") %>
+      </a>
+    </div>
+    <div class="navbar-collapse collapse navbar-responsive-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><p class="navbar-text">Anna</li>
+        <li><p class="navbar-text">
+          <span class="glyphicon glyphicon-off" aria-hidden="true" data-toggle="tooltip" title="Cerrar sesión">
+          </span></p></li>
+      </ul>
+    </div>
+  </div>
 
-<%= yield %>
+  <section>
+    <%=yield%>
+  </section>
+
+  <footer>
+    <p>M01 SL - 2015</p>
+  </footer>
 
 </body>
 </html>
