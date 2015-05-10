@@ -16,5 +16,72 @@
 #
 
 class Articulo < ActiveRecord::Base
-  self.per_page = 16
+  self.per_page = 12 # will_paginate
+
+  filterrific(
+    default_filter_params: { sorted_by: 'referencia_talla_asc' },
+    available_filters: [
+      :sorted_by,
+      :search_query
+    ]
+  )
+
+  scope :search_query, lambda { |query|
+    return nil  if query.blank?
+    # condition query, parse into individual keywords
+    terms = query.downcase.split(/\s+/)
+    # replace "*" with "%" for wildcard searches,
+    # append '%', remove duplicate '%'s
+    terms = terms.map { |e|
+      (e.gsub('*', '%') + '%').gsub(/%+/, '%')
+    }
+    # configure number of OR conditions for provision
+    # of interpolation arguments. Adjust this if you
+    # change the number of OR conditions.
+    num_or_conditions = 2
+    where(
+      terms.map {
+        or_clauses = [
+          "LOWER(articulos.referencia) LIKE ?",
+          "LOWER(articulos.nombre) LIKE ?"
+        ].join(' OR ')
+        "(#{ or_clauses })"
+      }.join(' AND '),
+      *terms.map { |e| [e] * num_or_conditions }.flatten
+    )
+  }
+
+  scope :sorted_by, lambda { |sort_option|
+    # extract the sort direction from the param value.
+    direction = (sort_option =~ /desc$/) ? 'desc' : 'asc'
+    case sort_option.to_s
+    when /^codigo_/
+      order("articulos.codigo #{ direction }")
+    when /^referencia_talla_/
+      order("articulos.referencia #{ direction }, articulos.talla #{ direction}")
+    when /^nombre_/
+      order("articulos.nombre #{ direction }")
+    when /^stock_/
+      order("articulos.stock #{ direction }")
+    when /^nombre_color_/
+      order("articulos.nombre_color #{ direction }")
+    when /^nombre_talla_/
+      order("articulos.nombre_talla #{ direction }")
+    else
+      raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
+    end
+  }
+
+  def self.options_for_sorted_by
+    [
+      ['Código', 'codigo_asc'],
+      ['Referencia', 'referencia_asc'],
+      ['Stock de menos a más', 'stock_asc'],
+      ['Stock de más a menos', 'stock_desc'],
+      ['Talla', 'talla_asc'],
+      ['Color', 'color_asc']
+    ]
+  end
+
+
 end
