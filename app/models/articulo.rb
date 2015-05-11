@@ -31,12 +31,10 @@ class Articulo < ActiveRecord::Base
   scope :search_query, lambda { |query|
     return nil  if query.blank?
 
-    # binding.pry
-    
     # condition query, parse into individual keywords
     terms = query.to_s.downcase.split(/\s+/)
     # replace "*" with "%" for wildcard searches,
-    # append '%', remove duplicate '%'s
+    # prepend '%' and append '%', remove duplicate '%'s
     terms = terms.map { |e|
       '%'+(e.gsub('*', '%') + '%').gsub(/%+/, '%')
     }
