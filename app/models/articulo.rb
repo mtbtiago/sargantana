@@ -16,7 +16,7 @@
 #
 
 class Articulo < ActiveRecord::Base
-  self.per_page = 12 # will_paginate
+  self.per_page = 10 # will_paginate
 
   filterrific(
     default_filter_params: { sorted_by: 'referencia_talla_asc' },
@@ -30,12 +30,15 @@ class Articulo < ActiveRecord::Base
 
   scope :search_query, lambda { |query|
     return nil  if query.blank?
+
+    # binding.pry
+    
     # condition query, parse into individual keywords
-    terms = query.downcase.split(/\s+/)
+    terms = query.to_s.downcase.split(/\s+/)
     # replace "*" with "%" for wildcard searches,
     # append '%', remove duplicate '%'s
     terms = terms.map { |e|
-      (e.gsub('*', '%') + '%').gsub(/%+/, '%')
+      '%'+(e.gsub('*', '%') + '%').gsub(/%+/, '%')
     }
     # configure number of OR conditions for provision
     # of interpolation arguments. Adjust this if you

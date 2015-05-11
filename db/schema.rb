@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150510111515) do
+ActiveRecord::Schema.define(version: 20150511182839) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,5 +34,7 @@ ActiveRecord::Schema.define(version: 20150510111515) do
   add_index "articulos", ["nombre_color"], name: "index_articulos_on_nombre_color", using: :btree
   add_index "articulos", ["nombre_talla"], name: "index_articulos_on_nombre_talla", using: :btree
   add_index "articulos", ["referencia"], name: "index_articulos_on_referencia", using: :btree
+  add_index "articulos", ["stock"], name: "idx_stock_asc", using: :btree
+  add_index "articulos", ["stock"], name: "idx_stock_desc", order: {"stock"=>:desc}, using: :btree
 
 end
