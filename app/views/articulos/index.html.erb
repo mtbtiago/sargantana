@@ -21,7 +21,8 @@
       <div class="form-group chardin_box" data-position="top" data-intro="Seleccionar un color">
           <p>Color</p>
           <%= f.select(:with_nombre_color, 
-            Articulo.select(:nombre_color).distinct.order(:nombre_color).map {|e| e[:nombre_color]},
+            # Articulo.select(:nombre_color).distinct.order(:nombre_color).map {|e| e[:nombre_color]},
+            @colores,
             {:include_blank => 'Todos'},
             {:class => 'form-control'}) %>
       </div>
@@ -30,7 +31,8 @@
       <div class="form-group chardin_box" data-position="top" data-intro="Seleccionar una talla">
           <p>Talla</p>
           <%= f.select(:with_nombre_talla, 
-            Articulo.select(:nombre_talla).distinct.order(:nombre_talla).map {|e| e[:nombre_talla]},
+            # Articulo.select(:nombre_talla).distinct.order(:nombre_talla).map {|e| e[:nombre_talla]},
+            @tallas,
             {:include_blank => 'Todas'},
             {:class => 'form-control'}) %>
       </div>
@@ -58,7 +60,7 @@
       <div id="results">
         <%= render(
               partial: 'articulos/articulos_list',
-              locals: { articulos: @articulos }
+              locals: { articulos: @articulos, colores: @colores, tallas: @tallas }
             ) %>
         </div>
       </div>

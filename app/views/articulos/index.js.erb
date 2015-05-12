@@ -1,11 +1,15 @@
 <% js = escape_javascript(
   render(
     :partial => 'articulos/articulos_list',
-    :locals => { :articulos => @articulos }
+    :locals => { articulos: @articulos, colores: @colores, tallas: @tallas }
   )
 ) %>
+
 $("#results").html("<%= js %>");
 $('#overlayTrigger').click(function(event) {
   event.preventDefault();
   $('body').chardinJs('start');
+  $('#navbar_test').click(function(event) {
+    changeColors();
+  });  
 });

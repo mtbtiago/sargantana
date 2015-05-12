@@ -1,0 +1,32 @@
+function changeColors() {
+
+// var newOptions = {"Option 1": "value1",
+//   "Option 2": "value2",
+//   "Option 3": "value3"
+// };
+
+    //< % = (if @colores.nil? ? "Todos" : @colores.map{|color| "\"#{color}\" : \"#{color}\""}.to_s) %>
+
+  var newOptions = {
+    <% if !@colores %>
+    <%= '"uno" : "uno", "dos" : "dos"' %>
+    <% else %>
+    <%= "\"#{@colores[0]}\" : \"#{@colores[0]}\", \"#{@colores[1]}\" : \"#{@colores[1]}\"" %>
+    <% end %>
+  };
+
+  var $el = $("#filterrific_with_nombre_color");
+  $el.empty(); // remove old options
+  $.each(newOptions, function(value,key) {
+    $el.append($("<option></option>")
+       .attr("value", value).text(key));
+  });
+}
+
+// Initialize event observers on document ready and turbolinks page:load
+jQuery(document).on('ready page:load', function() {
+    $('#navbar_test').click(function(event) {
+        changeColors();
+    });
+
+});

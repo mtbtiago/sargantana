@@ -6,8 +6,10 @@ class ArticulosController < ApplicationController
       :select_options => {
         sorted_by: Articulo.options_for_sorted_by
       }
-    ) or return
+    ) or return 
     @articulos = @filterrific.find.page(params[:page])
+    @colores = Articulo.search_query(@filterrific.search_query).map{|e| e[:nombre_color]}.uniq
+    @tallas = Articulo.search_query(@filterrific.search_query).map{|e| e[:nombre_talla]}.uniq
 
     respond_to do |format|
       format.html
