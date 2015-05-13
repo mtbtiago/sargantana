@@ -7,6 +7,8 @@ class ArticulosController < ApplicationController
         sorted_by: Articulo.options_for_sorted_by
       }
     ) or return
+    @colores = Articulo.search_query(@filterrific.search_query).map{|e| e[:nombre_color]}.uniq
+    @tallas = Articulo.search_query(@filterrific.search_query).map{|e| e[:nombre_talla]}.uniq
     @articulos = @filterrific.find.page(params[:page])
 
     respond_to do |format|
