@@ -1,6 +1,7 @@
 <div class="container">
   <%= form_for_filterrific @filterrific do |f| %>
-  <div class="row">
+  <%# big screen visible filters BEGIN %>
+  <div class="row visible_filters">
     <div class="col-md-3">
       <div class="form-group chardin_box" data-position="top" data-intro="Buscar por referencia o nombre">
         <p>Buscar</p>
@@ -9,7 +10,7 @@
           class: 'filterrific-periodically-observed form-control') %>
       </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
       <div class="form-group chardin_box" data-position="top" data-intro="Ordenar la consulta">
         <p>Ordenado por</p>
         <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by],
@@ -42,12 +43,73 @@
         <%= link_to(
           'Reiniciar búsqueda',
           reset_filterrific_url,
-          {:class => 'btn btn-success', :id => 'btn_reset_search'}) %>
+          {:class => 'btn btn-success search_btn', :id => 'btn_reset_search'}) %>
       </div>
     </div>
-    <%# add an automated spinner to your form when the list is refreshed %>
   </div>
+  <%# big screen visible filters END %>
+  <div class="row collapsed_filters">
+    <div class="col-sd-3">
+      <div class="form-group chardin_box" data-position="top" data-intro="Buscar por referencia o nombre">
+        <p>Buscar</p>
+        <%= f.text_field(
+          :search_query,
+          class: 'filterrific-periodically-observed form-control') %>
+      </div>
+    </div>
+    <div class="col-sd-3">
+      <button class="btn btn-primary search_btn" type="button" data-toggle="collapse" data-target="#more_search_collapsable" aria-expanded="false" aria-controls="more_search_collapsable">
+        Más filtros
+      </button>
+    </div>
+    <div class="col-sd-3">
+      <div class="form-group">
+        <%= link_to(
+          'Reiniciar búsqueda',
+          reset_filterrific_url,
+          {:class => 'btn btn-success search_btn', :id => 'btn_reset_search'}) %>
+      </div>
+    </div>
+  </div>
+  <div class="row collapsed_filters">
+    <div class="collapse" id="more_search_collapsable">
+      <div class="col-sd-2">
+        <div class="form-group chardin_box" data-position="top" data-intro="Ordenar la consulta">
+          <p>Ordenado por</p>
+          <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by],
+            {},
+            {:class => 'form-control'}) %>
+        </div>
+      </div>
+      <div class="col-sd-2">
+        <div class="form-group chardin_box" data-position="top" data-intro="Seleccionar un color">
+            <p>Color</p>
+            <%= f.select(:with_nombre_color, 
+              # Articulo.select(:nombre_color).distinct.order(:nombre_color).map {|e| e[:nombre_color]},
+              @colores,
+              {:include_blank => 'Todos'},
+              {:class => 'form-control'}) %>
+        </div>
+      </div>
+      <div class="col-sd-2">
+        <div class="form-group chardin_box" data-position="top" data-intro="Seleccionar una talla">
+            <p>Talla</p>
+            <%= f.select(:with_nombre_talla, 
+              # Articulo.select(:nombre_talla).distinct.order(:nombre_talla).map {|e| e[:nombre_talla]},
+              @tallas,
+              {:include_blank => 'Todas'},
+              {:class => 'form-control'}) %>
+        </div>
+      </div>
+    </div>    
+  </div>
+
+
+
+
+
  <% end %>
+<%# add an automated spinner to your form when the list is refreshed %>
 <div class="row">
   <div class="col-md-12">
     <%= render_filterrific_spinner %>
