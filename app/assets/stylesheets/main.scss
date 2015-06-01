@@ -28,6 +28,10 @@ body#login h2 {
     margin-top: 20px;
 }
 
+#more_search_button {
+    margin-top: 10px !important;
+}
+
 .form-signin {
     max-width: 330px;
     padding: 15px;
@@ -88,7 +92,7 @@ footer {
 }
 
 @media(min-width: 991px) {
-    .collapsed_filters {
+    .mobile_visible {
         display: none;
     }
 }
@@ -99,8 +103,5 @@ footer {
     }
     .search_btn {
         margin-top: 0px;
-    }
-    #btn_reset_search {
-        margin-top: 20px;
     }
 }

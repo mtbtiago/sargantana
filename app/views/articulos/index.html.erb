@@ -48,7 +48,7 @@
     </div>
   </div>
   <%# big screen visible filters END %>
-  <div class="row collapsed_filters">
+  <div class="row mobile_visible">
     <div class="col-sd-3">
       <div class="form-group chardin_box" data-position="top" data-intro="Buscar por referencia o nombre">
         <p>Buscar</p>
@@ -56,11 +56,6 @@
           :search_query,
           class: 'filterrific-periodically-observed form-control') %>
       </div>
-    </div>
-    <div class="col-sd-3">
-      <button class="btn btn-primary search_btn" type="button" data-toggle="collapse" data-target="#more_search_collapsable" aria-expanded="false" aria-controls="more_search_collapsable">
-        Más filtros
-      </button>
     </div>
     <div class="col-sd-3">
       <div class="form-group">
@@ -71,7 +66,7 @@
       </div>
     </div>
   </div>
-  <div class="row collapsed_filters">
+  <div class="row mobile_visible">
     <div class="collapse" id="more_search_collapsable">
       <div class="col-sd-2">
         <div class="form-group chardin_box" data-position="top" data-intro="Ordenar la consulta">
@@ -104,21 +99,17 @@
     </div>    
   </div>
 
-
-
-
-
- <% end %>
-<%# add an automated spinner to your form when the list is refreshed %>
-<div class="row">
-  <div class="col-md-12">
-    <%= render_filterrific_spinner %>
+  <% end %>
+  <%# add an automated spinner to your form when the list is refreshed %>
+  <div class="row">
+    <div class="col-sd-12">
+      <%= render_filterrific_spinner %>
+    </div>
   </div>
-</div>
 </div>
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-sd-12">
       <div id="results">
         <%= render(
               partial: 'articulos/articulos_list',
